@@ -315,8 +315,8 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 
    | API Method | API URL                  | Desc                                                    | Req Params | Resp Result                          |
    | ---------- | ------------------------ | ------------------------------------------------------- | ---------- | ------------------------------------ |
-   | GET        | URL/rank/getCorrectRank  | 取得正確解題的學生排行（前五名，有同值則同名，且值>0）  |            | [{rank, account, name, correctNum}]  |
-   | GET        | URL/rank/getBestCodeRank | 取得最佳解答的學生排行 （前五名，有同值則同名，且值>0） |            | [{rank, account, name, bestCodeNum}] |
+   | GET        | URL/rank/getCorrectRank  | 取得正確解題的學生排行（前五名，有同值則同名，且值>0）  | courseId   | [{rank, account, name, correctNum}]  |
+   | GET        | URL/rank/getBestCodeRank | 取得最佳解答的學生排行 （前五名，有同值則同名，且值>0） | courseId   | [{rank, account, name, bestCodeNum}] |
 
    
 
