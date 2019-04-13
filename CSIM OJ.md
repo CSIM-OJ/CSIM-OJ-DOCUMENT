@@ -269,7 +269,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    | POST           | URL/teacher/deleteStudentList | 將學生退出課程     | courseId, accountList: [account] |                                      |
    | POST           | URL/teacher/addAssistant      | 將助教加入課程     | courseId, accountList:[account]  |                                      |
    | POST           | URL/teacher/deleteAssistant   | 將助教退出課程     | courseId, accountList:[account]  |                                      |
-   | GET            | URL/teacher/courseList        | 取得老師的所有課程 | teacherId                        | [{ courseId, courseName, semester }] |
+   | GET            | URL/teacher/courseList        | 取得老師的所有課程 |                                  | [{ courseId, courseName, semester }] |
 
    
 
