@@ -217,7 +217,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    | POST       | URL/student/changePassword | 更改密碼                       | account, oriPassowrd, newPassword                            |                                                              |
    | GET        | URL/student/courseList     | 學生全部課程                   |                                                              | [{ courseId, courseName, teacherName, semester }]            |
    | GET        | URL/student/info           | 課程下的個人學生資料           | courseId                                                     | account, name, studentClass, undoNum, doneNum, bestCodeNum, correctNum, incorrectNum |
-   | GET        | URL/student/historyScore   | 課程下的學生歷史成績及題目資訊 | courseId                                                     | [{problemID, problemName, type, code, historyCode, score, handDate, rate, runTime, correctRate, isBestCode(Boolean), copys: [{account, similarity}]}] |
+   | GET        | URL/student/historyScore   | 課程下的學生歷史成績及題目資訊 | courseId                                                     | [{problemID, problemName, type,  historyCode:[{handDate, code, runTime, output, symbol, errorMessage}], rate,  correctRate, isBestCode(Boolean), copys: [{account, similarity}]}] |
    | GET        | URL/student/problemInfo    | 課程下的學生所有題目資料       | courseId, type:(作業 \|\| 練習題 \|\| 討論題 \|\| 全部), isJudge(boolean) | [{problemID, name, type, deadline, rate}]                    |
    | POST       | URL/student/updateRate     | 課程下的學生對題目的難易度評分 | problemID, rate                                              |                                                              |
 
@@ -301,10 +301,11 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    - [x] 取得所有課程資訊
    - [x] 取得課程裡的學生所有資訊
 
-   | API Method | API URL                   | Desc                     | Req Params | Resp Result                                         |
-   | ---------- | ------------------------- | ------------------------ | ---------- | --------------------------------------------------- |
-   | GET        | URL/course/getCourses     | 取得所有課程             |            | [{ courseId, courseName, *teacherName, *semester }] |
-   | GET        | URL/course/getStudentInfo | 取得課程裡的學生所有資訊 | courseId   |                                                     |
+   | API Method | API URL                    | Desc                     | Req Params | Resp Result                                                  |
+   | ---------- | -------------------------- | ------------------------ | ---------- | ------------------------------------------------------------ |
+   | GET        | URL/course/getCourses      | 取得所有課程             |            | [{ courseId, courseName, *teacherName, *semester }]          |
+   | GET        | URL/course/getStudentInfo  | 取得課程裡的學生所有資訊 | courseId   |                                                              |
+   | GET        | URL/course/getStudentsData | 取得課程的所有學生成績   | courseId   | studentID, studentName, studentClass, problems: [{name, score(若未被批改回傳"未作答"), date, type, historyCode}] |
 
    
 
