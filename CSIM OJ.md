@@ -261,15 +261,15 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    - [x] 取得課程下的所有feedback(參考Feedback Api)
    - [ ] 建立、刪除隊伍(參考Team Api)
 
-   | **API Method** | API URL                       | Desc               | Req Params                       | Resp Result                          |
-   | -------------- | ----------------------------- | ------------------ | -------------------------------- | ------------------------------------ |
-   | POST           | URL/teacher/createCourse      | 建立課程           | courseName, semester             |                                      |
-   | POST           | URL/teacher/deleteCourse      | 刪除課程           | courseId                         |                                      |
-   | POST           | URL/teacher/addStudentList    | 將學生加入課程     | courseId, accountList: [account] |                                      |
-   | POST           | URL/teacher/deleteStudentList | 將學生退出課程     | courseId, accountList: [account] |                                      |
-   | POST           | URL/teacher/addAssistant      | 將助教加入課程     | courseId, accountList:[account]  |                                      |
-   | POST           | URL/teacher/deleteAssistant   | 將助教退出課程     | courseId, accountList:[account]  |                                      |
-   | GET            | URL/teacher/courseList        | 取得老師的所有課程 |                                  | [{ courseId, courseName, semester }] |
+   | **API Method** | API URL                       | Desc               | Req Params                                                   | Resp Result                          |
+   | -------------- | ----------------------------- | ------------------ | ------------------------------------------------------------ | ------------------------------------ |
+   | POST           | URL/teacher/createCourse      | 建立課程           | courseName, semester                                         |                                      |
+   | POST           | URL/teacher/deleteCourse      | 刪除課程           | courseId                                                     |                                      |
+   | POST           | URL/teacher/addStudentList    | 將學生加入課程     | courseId, accountList: [{account, studentName, studentClass}] |                                      |
+   | POST           | URL/teacher/deleteStudentList | 將學生退出課程     | courseId, accountList: [account]                             |                                      |
+   | POST           | URL/teacher/addAssistant      | 將助教加入課程     | courseId, accountList:[account]                              |                                      |
+   | POST           | URL/teacher/deleteAssistant   | 將助教退出課程     | courseId, accountList:[account]                              |                                      |
+   | GET            | URL/teacher/courseList        | 取得老師的所有課程 |                                                              | [{ courseId, courseName, semester }] |
 
    
 
@@ -305,7 +305,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    | ---------- | -------------------------- | ------------------------ | ---------- | ------------------------------------------------------------ |
    | GET        | URL/course/getCourses      | 取得所有課程             |            | [{ courseId, courseName, *teacherName, *semester }]          |
    | GET        | URL/course/getStudentInfo  | 取得課程裡的學生所有資訊 | courseId   |                                                              |
-   | GET        | URL/course/getStudentsData | 取得課程的所有學生成績   | courseId   | studentID, studentName, studentClass, problems: [{name, score(若未被批改回傳"未作答"), date, type, historyCode}] |
+   | GET        | URL/course/getStudentsData | 取得課程的所有學生成績   | courseId   | studentId, studentName, studentClass, problems: [{name, score(若未被批改回傳"未作答"), date, type, historyCode}] |
 
    
 
