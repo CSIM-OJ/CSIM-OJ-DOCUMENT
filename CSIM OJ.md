@@ -245,7 +245,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    | API Method | API URL               | Desc                   | Req Params                                  | Resp Result                                                  |
    | ---------- | --------------------- | ---------------------- | ------------------------------------------- | ------------------------------------------------------------ |
    | POST       | URL/judge/judgeCode   | 批改代碼               | problemId, code, language(Java \|\| Python) |                                                              |
-   | GET        | URL/judge/judgedInfo  | 已被批改後的資訊       | problemId                                   | handDate, score, runTime, code, symbol, CopyResult: [{anotherStudentId, similarity}], errorInfo, best(Boolean) |
+   | GET        | URL/judge/judgedInfo  | 已被批改後的資訊       | problemId                                   | handDate, score, runTime, code, symbol, copyResult: [{anotherStudentId, similarity}], errorInfo, best(Boolean) |
    | GET        | URL/judge/checkJudged | 學生在此題是否已被批改 | porblemId                                   | judged(boolean)                                              |
    | POST       | URL/judge/judgeCopy   | 判斷抄襲               | problemId                                   |                                                              |
 
