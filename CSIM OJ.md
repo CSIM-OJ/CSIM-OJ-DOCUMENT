@@ -326,10 +326,10 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
   - [x] 新增課程下的回饋
   - [x] 取得課程下的所有回饋
 
-  | API Method | API URL                         | Desc                     | Req Params        | Resp Result |
-  | ---------- | ------------------------------- | ------------------------ | ----------------- | ----------- |
-  | POST       | URL/feedback/addFeedback        | 新增回饋                 | courseId, content |             |
-  | GET        | URL/feedback/getCourseFeedbacks | 取得課程下的所有feedback | courseId          |             |
+  | API Method | API URL                         | Desc                     | Req Params        | Resp Result                      |
+  | ---------- | ------------------------------- | ------------------------ | ----------------- | -------------------------------- |
+  | POST       | URL/feedback/addFeedback        | 新增回饋                 | courseId, content |                                  |
+  | GET        | URL/feedback/getCourseFeedbacks | 取得課程下的所有feedback | courseId          | [{account, name, date, content}] |
 
   
 
