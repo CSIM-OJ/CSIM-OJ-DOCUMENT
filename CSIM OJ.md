@@ -261,18 +261,17 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    - [x] 取得課程下的所有feedback(參考Feedback Api)
    - [ ] 建立、刪除隊伍(參考Team Api)
 
-   | **API Method** | API URL                       | Desc                   | Req Params                                                   | Resp Result                          |
-   | -------------- | ----------------------------- | ---------------------- | ------------------------------------------------------------ | ------------------------------------ |
-   | POST           | URL/teacher/createCourse      | 建立課程               | courseName, semester                                         |                                      |
-   | POST           | URL/teacher/deleteCourse      | 刪除課程               | courseId                                                     |                                      |
-   | POST           | URL/teacher/addStudentList    | 將學生加入課程         | courseId, accountList: [{account, studentName, studentClass}] |                                      |
-   | POST           | URL/teacher/deleteStudentList | 將學生退出課程         | courseId, accountList: [account]                             |                                      |
-   | POST           | URL/teacher/addAssistant      | 將助教加入課程         | courseId, accountList:[account]                              |                                      |
-   | POST           | URL/teacher/deleteAssistant   | 將助教退出課程         | courseId, accountList:[account]                              |                                      |
-   | GET            | URL/teacher/courseList        | 取得老師的所有課程     |                                                              | [{ courseId, courseName, semester }] |
-   | GET            | URL/teacher/studentClassList  | 取得班級列表           |                                                              | [className]                          |
-   | GET            | URL/teacher/assistantList     | 取得未被指派的助教名單 |                                                              | [{assistantId, assistantName}]       |
-   | POST           | URL/teacher/newCourse         | 新增課程               | {courseName, semester, studentClassList:[班級名稱], taList:[助教帳號]} |                                      |
+   | **API Method** | API URL                         | Desc                   | Req Params                                                   | Resp Result                          |
+   | -------------- | ------------------------------- | ---------------------- | ------------------------------------------------------------ | ------------------------------------ |
+   | POST           | URL/teacher/createCourse        | 建立課程               | courseName, semester, studentClass, taList:[助教帳號]        |                                      |
+   | POST           | URL/teacher/deleteCourse        | 刪除課程               | courseId                                                     |                                      |
+   | POST           | URL/teacher/addStudentList      | 將學生加入課程         | courseId, accountList: [{account, studentName, studentClass}] |                                      |
+   | POST           | URL/teacher/deleteStudentList   | 將學生退出課程         | courseId, accountList: [account]                             |                                      |
+   | POST           | URL/teacher/addAssistantList    | 將助教加入課程         | courseId, accountList:[account]                              |                                      |
+   | POST           | URL/teacher/deleteAssistantList | 將助教退出課程         | courseId, accountList:[account]                              |                                      |
+   | GET            | URL/teacher/courseList          | 取得老師的所有課程     |                                                              | [{ courseId, courseName, semester }] |
+   | GET            | URL/teacher/studentClassList    | 取得班級列表           |                                                              | [className]                          |
+   | GET            | URL/teacher/assistantList       | 取得未被指派的助教名單 |                                                              | [{assistantId, assistantName}]       |
 
    
 
