@@ -306,7 +306,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    | API Method | API URL                    | Desc                   | Req Params | Resp Result                                                  |
    | ---------- | -------------------------- | ---------------------- | ---------- | ------------------------------------------------------------ |
    | GET        | URL/course/getCourses      | 取得所有課程           |            | [{ courseId, courseName, teacherName, semester }]            |
-   | GET        | URL/course/getStudentsData | 取得課程的所有學生成績 | courseId   | studentId, studentName, studentClass, problems: [{name, date, type, historyCode:[ ]}] |
+   | GET        | URL/course/getStudentsData | 取得課程的所有學生成績 | courseId   | [studentId, studentName, studentClass, problems: [{name, date, type, historyCode:[ ]}] |
 
    
 
