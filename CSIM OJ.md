@@ -303,11 +303,10 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    - [x] 取得所有課程資訊
    - [x] 取得課程裡的學生所有資訊
 
-   | API Method | API URL                    | Desc                     | Req Params | Resp Result                                                  |
-   | ---------- | -------------------------- | ------------------------ | ---------- | ------------------------------------------------------------ |
-   | GET        | URL/course/getCourses      | 取得所有課程             |            | [{ courseId, courseName, *teacherName, *semester }]          |
-   | GET        | URL/course/getStudentInfo  | 取得課程裡的學生所有資訊 | courseId   |                                                              |
-   | GET        | URL/course/getStudentsData | 取得課程的所有學生成績   | courseId   | studentId, studentName, studentClass, problems: [{name, score(若未被批改回傳"未作答"), date, type, historyCode}] |
+   | API Method | API URL                    | Desc                   | Req Params | Resp Result                                                  |
+   | ---------- | -------------------------- | ---------------------- | ---------- | ------------------------------------------------------------ |
+   | GET        | URL/course/getCourses      | 取得所有課程           |            | [{ courseId, courseName, teacherName, semester }]            |
+   | GET        | URL/course/getStudentsData | 取得課程的所有學生成績 | courseId   | studentId, studentName, studentClass, problems: [{name, date, type, historyCode:[ ]}] |
 
    
 
