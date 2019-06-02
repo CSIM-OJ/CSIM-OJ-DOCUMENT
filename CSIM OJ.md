@@ -183,7 +183,6 @@ ProblemBank
     ```json
     id // primary key, bigserial
     name // text, 題目名稱
-    type // text, 題目類型(作業 || 練習題 || 討論題)
     category // text, 題目作答類型(輸入輸出 || 輸入寫檔 || 讀檔輸出 || 讀檔寫檔)
     tag // text[], 題型分類(Java || Python, 條件,迴圈)(以,為分隔)
     description // text, 題目描述
@@ -376,8 +375,8 @@ ProblemBank
 
     | API Method | API URL                       | Desc                 | Req Params                                                   | Resp Result                                                  |
     | ---------- | ----------------------------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-    | POST       | URL/problemBank/addProblem    | 在題庫中建立題目     | name, type, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
-    | GET        | URL/problemBank/getAllProblem | 在題庫中取得所有題目 |                                                              | {[name, type, category, tag, description, inputDesc, outputDesc, testCases]} |
+    | POST       | URL/problemBank/addProblem    | 在題庫中建立題目     | name, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
+    | GET        | URL/problemBank/getAllProblem | 在題庫中取得所有題目 |                                                              | {[name, category, tag, description, inputDesc, outputDesc, testCases]} |
     | POST       | URL/problemBank/deleteProblem | 在題庫中刪除題目     | problemBankId                                                |                                                              |
 
     
