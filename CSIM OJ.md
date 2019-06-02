@@ -23,7 +23,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 1. **student**：學生
 
    ```json
-   student_id // primary key, bigserial
+   id // primary key, bigserial
    account // text, 學生學號
    password // text, 學生密碼
    name // text, 學生姓名
@@ -33,14 +33,14 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 2. **problem**
 
    ```json
-   problem_id // primary key, bigserial
+   id // primary key, bigserial
    course_id // foreign key, bigserial
    name // text, 題目名稱
    type // text, 題目類型(作業 || 練習題 || 討論題)
    category // text, 題目作答類型(輸入輸出 || 輸入寫檔 || 讀檔輸出 || 讀檔寫檔)
    tag // text[], 題型分類(Java || Python, 條件,迴圈)(以,為分隔)
    rate // double, 題目平均難易度,預設為0
-   desc // text, 題目描述
+   description // text, 題目描述
    input_desc // text, 輸入描述
    output_desc // text, 輸出描述
    test_cases: {[ // json, 測試範本
@@ -52,12 +52,14 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
    incorrect_num // integer, 此題錯誤(未滿分)人數, 預設為0
    correct_rate // double, 正確率, 預設為0
    best_student_account // text, 最佳代碼的學生學號(account) // 注意學生資料刪除時，須同步
+   keyword // text[], 該題須出現的程式語言的關鍵字, 預設為空
+   pattern // text[], 該題須出現的模板代碼, 預設為空
    ```
 
 3. **copy**
 
    ```json
-   copy_id // primary key, bigserial
+   id // primary key, bigserial
    problem_id // foreign key, bigserial
    student_one_account // foreign key, 學生1學號(account) // 注意學生資料刪除時，須同步
    student_two_account // foreign key, 學生2學號(account) // 注意學生資料刪除時，須同步
@@ -67,7 +69,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 4. **teacher** // 當刪除Teacher時，同步刪除Course
 
    ```json
-   teacherId // primary key, bigserial
+   id // primary key, bigserial
    account // text, 老師學號
    password // text, 老師密碼
    name // text, 老師密碼
@@ -76,7 +78,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 5. **assistant**
 
    ```json
-   assistantId // primary key, bigserial
+   id // primary key, bigserial
    account // text, 助教學號
    password // text, 助教密碼
    name // text, 助教姓名
@@ -85,7 +87,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 6. **admin**
 
    ```json
-   adminId // primary key, bigserial
+   id // primary key, bigserial
    account // text, 管理員學號
    password // text, 管理員密碼
    name // text, 管理員姓名
@@ -94,7 +96,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 7. **course** // 當刪除course時，一併刪除problem、copy
 
    ```js
-   course_id // primary key, bigserial
+   id // primary key, bigserial
    teacher_id // foreign key, bigserial
    course_name // text, 課程名稱
    semester // text, 課程日期(格式:104上 || 104下)
@@ -110,7 +112,7 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 9. **judge**
 
   ```json
-  judge_id // primary key, bigserial
+  id // primary key, bigserial
   problemId // foreign key, bigserial
   studentId // foreign key, bigserial
   rate // double, 題目難易度, 預設為0
@@ -128,17 +130,17 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 10. **feedback** // 當刪除學生會同步刪除feedback
 
   ```json
-  feedbackId // primary key, bigserial
+  id // primary key, bigserial
   courseId // foreign key, bigserial
   studentId // forign key, bigserial
   date // data, 提送feedback當時日期(格式yyyy-MM-dd)
   content // text, feedback內容
   ```
 
-11. **dashboard**
+11. **dashboard(待做)**
 
     ```json
-    dashboardId // primary key, bigserial
+    id // primary key, bigserial
     onlineNum // integer, (今日)在線人數, 預設為0
     activeNum // integer, (今日)活躍人數，當天頁面訪問次數超過5(看checkLogin呼叫幾次), 預設為0
     todayDoDum // integer, 今日做題次數（今日批改次數), 預設為0
@@ -168,10 +170,28 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
 
 13. **group**
 
-    ```js
-    group_id // primary key, bigserial
+    ```json
+    id // primary key, bigserial
     course_id // foreign key, bigserial
     member // text[], 學生的學號(account) // 刪除學生資料時，須同步刪除
+    ```
+
+
+14. **problem_bank**
+
+    ```json
+    id // primary key, bigserial
+    name // text, 題目名稱
+    type // text, 題目類型(作業 || 練習題 || 討論題)
+    category // text, 題目作答類型(輸入輸出 || 輸入寫檔 || 讀檔輸出 || 讀檔寫檔)
+    tag // text[], 題型分類(Java || Python, 條件,迴圈)(以,為分隔)
+    description // text, 題目描述
+    input_desc // text, 輸入描述
+    output_desc // text, 輸出描述
+    test_cases: {[ // json, 測試範本
+    	"inputSample": "", // String, 輸入範本
+         "outputSample": "" // String, 輸出範本
+    ]}
     ```
 
     
