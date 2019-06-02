@@ -16,6 +16,7 @@ Student -- 1-擁有-N --> Feedback[回饋];
 Student -- 1-擁有-N --> Judge[批改];
 Course -- 1-擁有-N --> Assistant_Course[助教_課程];
 Assistant_Course -- N-擁有-1 --> Assistant[助教]
+ProblemBank
 ````
 
 + Table：
@@ -370,5 +371,13 @@ Assistant_Course -- N-擁有-1 --> Assistant[助教]
     | GET        | URL/data/getOnlineData    | 取得在線與活躍人數統計（6天）                                |            | [{date, onlineNum, activeNum}]                               |
     | GET        | URL/data/getDoPerDayData  | 取得每日做題人數（6天）                                      |            | [{date, doPerDayNum}]                                        |
     | GET        | URL/data/getJudgeLiveData | 取得批改即時資訊                                             |            | [{time, studentID, studentName,  problemID, problemName, score, errorMsg}] |
+
+13. 題庫api
+
+    | API Method | API URL                       | Desc                 | Req Params                                                   | Resp Result                                                  |
+    | ---------- | ----------------------------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+    | POST       | URL/problemBank/addProblem    | 在題庫中建立題目     | name, type, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
+    | GET        | URL/problemBank/getAllProblem | 在題庫中取得所有題目 |                                                              | {[name, type, category, tag, description, inputDesc, outputDesc, testCases]} |
+    | POST       | URL/problemBank/deleteProblem | 在題庫中刪除題目     | problemBankId                                                |                                                              |
 
     
