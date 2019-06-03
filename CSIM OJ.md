@@ -373,11 +373,12 @@ ProblemBank
 
 13. 題庫api
 
-    | API Method | API URL                       | Desc                 | Req Params                                                   | Resp Result                                                  |
-    | ---------- | ----------------------------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-    | POST       | URL/problemBank/addProblem    | 在題庫中建立題目     | name, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
-    | POST       | URL/problemBank/editProblem   | 在題庫中編輯題目     | problemBankId, name, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
-    | GET        | URL/problemBank/getAllProblem | 在題庫中取得所有題目 |                                                              | {[name, category, tag, description, inputDesc, outputDesc, testCases]} |
-    | POST       | URL/problemBank/deleteProblem | 在題庫中刪除題目     | problemBankId                                                |                                                              |
+    | API Method | API URL                        | Desc                 | Req Params                                                   | Resp Result                                                  |
+    | ---------- | ------------------------------ | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+    | POST       | URL/problemBank/addProblem     | 在題庫中建立題目     | name, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
+    | POST       | URL/problemBank/editProblem    | 在題庫中編輯題目     | problemBankId, name, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
+    | GET        | URL/problemBank/getAllProblem  | 在題庫中取得所有題目 |                                                              | [{problemBankId, name, tag}]                                 |
+    | GET        | URL/problemBank/getProblemInfo | 取得題目詳細資訊     | problemBankId                                                | problemBankId, name, category, tag, description, inputDesc, outputDesc, testCases |
+    | POST       | URL/problemBank/deleteProblem  | 在題庫中刪除題目     | problemBankId                                                |                                                              |
 
     
