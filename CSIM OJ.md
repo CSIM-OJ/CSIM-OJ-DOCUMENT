@@ -8,14 +8,14 @@ Teacher[教授] -- 1-擁有-N --> Course;
 Course -- 1-擁有-N --> Problem[題目];
 Problem -- 1-擁有-N --> Copy[抄襲];
 Problem -- 1-擁有-N --> Judge;
-Course -- 1-擁有-N --> Feedback
-Course -- 1-擁有-N --> Team[隊伍]
+Problem -- 1-擁有-N --> Team[隊伍];
+Course -- 1-擁有-N --> Feedback;
 Course[課程] -- 1-擁有-N --> Student_Course[學生_課程];
-Student_Course -- N-擁有-1 --> Student[學生]
+Student_Course -- N-擁有-1 --> Student[學生];
 Student -- 1-擁有-N --> Feedback[回饋];
 Student -- 1-擁有-N --> Judge[批改];
 Course -- 1-擁有-N --> Assistant_Course[助教_課程];
-Assistant_Course -- N-擁有-1 --> Assistant[助教]
+Assistant_Course -- N-擁有-1 --> Assistant[助教];
 ProblemBank
 ````
 
@@ -169,12 +169,14 @@ ProblemBank
     ```
 
 
-13. **group**
+13. **team**
 
     ```json
     id // primary key, bigserial
-    course_id // foreign key, bigserial
-    member // text[], 學生的學號(account) // 刪除學生資料時，須同步刪除
+    problem_id // foreign key, bigserial
+    student_account // text, 學生的學號(account) // 刪除學生資料時，須同步刪除
+    comment_result // json, 裡面每一個json欄位有:account、rate、comment
+    score // double, 學生這題獲得總分數(rate + judge)
     ```
 
 
@@ -380,5 +382,15 @@ ProblemBank
     | GET        | URL/problemBank/getAllProblem  | 在題庫中取得所有題目 |                                                              | [{id, name, category,  tag}]                                 |
     | GET        | URL/problemBank/getProblemInfo | 取得題目詳細資訊     | id                                                           | id, name, category, tag, description, inputDesc, outputDesc, testCases |
     | POST       | URL/problemBank/deleteProblem  | 在題庫中刪除題目     | id                                                           |                                                              |
+
+    
+
+14. 隊伍api
+
+    | API Method | API URL | Desc | Req Params | Resp Result |
+    | ---------- | ------- | ---- | ---------- | ----------- |
+    |            |         |      |            |             |
+    |            |         |      |            |             |
+    |            |         |      |            |             |
 
     
