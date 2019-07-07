@@ -175,7 +175,15 @@ ProblemBank
     id // primary key, bigserial
     problem_id // foreign key, bigserial
     student_account // text, 學生的學號(account) // 刪除學生資料時，須同步刪除
-    comment_result // json, 裡面每一個json欄位有:account、rate、comment
+    comment_result:[{
+      account: '', // string, 被批改的學生學號
+      score: 0, // integer, 被批改的學生分數
+      correctValue: 0, // integer, 程式正確性
+      readValue: 0, // integer, 程式可讀性
+      skillValue: 0, // integer, 技巧運用
+      completeValue: 0, // integer, 程式完整性
+      wholeValue: 0 // integer, 綜合評分
+    }]
     score // double, 學生這題獲得總分數(rate + judge)
     ```
 
@@ -192,7 +200,7 @@ ProblemBank
     output_desc // text, 輸出描述
     test_cases: {[ // json, 測試範本
     	"inputSample": "", // String, 輸入範本
-         "outputSample": "" // String, 輸出範本
+      "outputSample": "" // String, 輸出範本
     ]}
     ```
 
@@ -241,7 +249,8 @@ ProblemBank
    | GET        | URL/student/info           | 課程下的個人學生資料           | courseId                                                     | account, name, studentClass, undoNum, doneNum, bestCodeNum, correctNum, incorrectNum |
    | GET        | URL/student/historyScore   | 課程下的學生歷史成績及題目資訊 | courseId                                                     | [{problemId, problemName, type,  historyCode:[{handDate, code, runTime, output, symbol, score, errorMessage}], rate,  correctRate, isBestCode(Boolean), copys: [{account, similarity}]}] |
    | GET        | URL/student/problemInfo    | 課程下的學生所有題目資料       | courseId, type:(作業 \|\| 練習題 \|\| 討論題 \|\| 全部), isJudge(boolean) | [{problemId, name, type, deadline, rate}]                    |
-   | POST       | URL/student/updateRate     | 課程下的學生對題目的難易度評分 | problemID, rate                                              |                                                              |
+   | POST       | URL/student/updateRate     | 課程下的學生對題目的難易度評分 | problemId, rate                                              |                                                              |
+   | GET        | URL/student/allStud        | 課程下的所有學生學號           | courseId                                                     | [studentId]                                                  |
 
 3. 題目api（problem）
 
@@ -385,13 +394,14 @@ ProblemBank
 
     
 
-14. 隊伍api
+14. 隊伍api (team)
 
-    | API Method | API URL | Desc | Req Params | Resp Result |
-    | ---------- | ------- | ---- | ---------- | ----------- |
-    |            |         |      |            |             |
-    |            |         |      |            |             |
-    |            |         |      |            |             |
-
+    | API Method | API URL                     | Desc                       | Req Params                                                   | Resp Result                                                  |
+    | ---------- | --------------------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+    | POST       | URL/team/createTeam         | 建立討論題隊伍             | problemId, pair:[[批改者學號, 被批改者學號], [批改者學號, 被批改者學號], ...] |                                                              |
+    | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | courseId, problemId                                          | [{studentId, code}]                                          |
+    | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | courseId, problemId                                          | status(boolean)                                              |
+| GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | courseId, problemId                                          | [{studentId, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
+    
     
 
