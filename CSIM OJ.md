@@ -46,7 +46,7 @@ ProblemBank
    output_desc // text, 輸出描述
    test_cases: {[ // json, 測試範本
    	"inputSample": "", // String, 輸入範本
-        "outputSample": "" // String, 輸出範本
+     "outputSample": "" // String, 輸出範本
    ]}
    deadline // date, 截止日期, 格式為yyyy-mm-dd
    correct_num // integer, 此題正確(滿分)人數, 預設為0
@@ -396,12 +396,12 @@ ProblemBank
 
 14. 隊伍api (team)
 
-    | API Method | API URL                     | Desc                       | Req Params                                                   | Resp Result                                                  |
-    | ---------- | --------------------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-    | POST       | URL/team/createTeam         | 建立討論題隊伍             | problemId, pair:[[批改者學號, 被批改者學號], [批改者學號, 被批改者學號], ...] |                                                              |
-    | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | courseId, problemId                                          | [{studentId, code}]                                          |
-    | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | courseId, problemId                                          | status(boolean)                                              |
-| GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | courseId, problemId                                          | [{studentId, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
+    | API Method | API URL                     | Desc                       | Req Params                                                | Resp Result                                                  |
+    | ---------- | --------------------------- | -------------------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
+    | POST       | URL/team/createTeam         | 建立討論題隊伍             | problemId, pair:[[correctAccount, correctedAccount], ...] |                                                              |
+    | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | courseId, problemId                                       | [{studentId, code}]                                          |
+    | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | courseId, problemId                                       | status(boolean)                                              |
+| GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | courseId, problemId                                       | [{studentId, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
     
     
 
