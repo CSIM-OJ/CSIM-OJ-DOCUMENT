@@ -174,17 +174,18 @@ ProblemBank
     ```json
     id // primary key, bigserial
     problem_id // foreign key, bigserial
-    student_account // text, 學生的學號(account) // 刪除學生資料時，須同步刪除
+    account // text, 批改者學生的學號 // 刪除學生資料時，須同步刪除
+    corrected_account // text[], 被批改者學生的學號 // 刪除學生資料時，須同步刪除
     comment_result:[{
-      account: '', // string, 被批改的學生學號
-      score: 0, // integer, 被批改的學生分數
+      account: '', // string, 批改的學生學號 // 刪除學生資料時，須同步刪除
+      score: 0, // integer, 批改的學生分數
       correctValue: 0, // integer, 程式正確性
       readValue: 0, // integer, 程式可讀性
       skillValue: 0, // integer, 技巧運用
       completeValue: 0, // integer, 程式完整性
       wholeValue: 0 // integer, 綜合評分
     }]
-    score // double, 學生這題獲得總分數(rate + judge)
+    score // double, 學生這題獲得總分數(comment_result + judge)
     ```
 
 
