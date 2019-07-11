@@ -177,15 +177,14 @@ ProblemBank
     account // text, 批改者學生的學號 // 刪除學生資料時，須同步刪除
     corrected_account // text[], 被批改者學生的學號 // 刪除學生資料時，須同步刪除
     comment_result:[{
-      account: '', // string, 批改的學生學號 // 刪除學生資料時，須同步刪除
-      score: 0, // integer, 批改的學生分數
-      correctValue: 0, // integer, 程式正確性
-      readValue: 0, // integer, 程式可讀性
-      skillValue: 0, // integer, 技巧運用
-      completeValue: 0, // integer, 程式完整性
-      wholeValue: 0 // integer, 綜合評分
+      account: '', // double, 批改的學生學號 // 刪除學生資料時，須同步刪除
+      score: 0, // double, 批改的學生分數
+      correctValue: 0, // double, 程式正確性
+      readValue: 0, // double, 程式可讀性
+      skillValue: 0, // double, 技巧運用
+      completeValue: 0, // double, 程式完整性
+      wholeValue: 0 // double, 綜合評分
     }]
-    score // double, 學生這題獲得總分數(comment_result + judge)
     ```
 
 
@@ -397,12 +396,12 @@ ProblemBank
 
 14. 隊伍api (team)
 
-    | API Method | API URL                     | Desc                       | Req Params                                                | Resp Result                                                  |
-    | ---------- | --------------------------- | -------------------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
-    | POST       | URL/team/createTeam         | 建立討論題隊伍             | problemId, pair:[[correctAccount, correctedAccount], ...] |                                                              |
-    | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | courseId, problemId                                       | [{studentId, code}]                                          |
-    | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | courseId, problemId                                       | status(boolean)                                              |
-| GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | courseId, problemId                                       | [{studentId, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
+    | API Method | API URL                     | Desc                       | Req Params                                                 | Resp Result                                                  |
+    | ---------- | --------------------------- | -------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
+    | POST       | URL/team/createTeam         | 建立討論題隊伍             | problemId, pairs:[[correctAccount, correctedAccount], ...] |                                                              |
+    | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | problemId                                                  | [{studentAccount, code}]                                     |
+    | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | problemId                                                  | status(boolean)                                              |
+| GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | problemId                                                  | [{studentAccount, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
     
     
 
