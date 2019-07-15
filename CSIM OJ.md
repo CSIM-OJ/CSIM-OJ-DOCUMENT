@@ -402,6 +402,7 @@ ProblemBank
     | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | problemId                                                  | [{studentAccount, code}]                                     |
     | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | problemId                                                  | status(boolean)                                              |
 | GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | problemId                                                  | [{studentAccount, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
+    | POST       | URL/team/summitCorrect      | 送出評分資訊               | problemId                                                  | [{correctedAccount(被批改的學號), score, correctValue, readValue, skillValue, completeValue, wholeValue}] |
     
     
 
