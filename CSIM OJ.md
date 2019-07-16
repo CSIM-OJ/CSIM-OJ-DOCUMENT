@@ -262,7 +262,7 @@ ProblemBank
    | ---------- | ------------------------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
    | GET        | URL/problem/getInfo       | 題目的資訊           | problemId                                                    | name, type, category, tag:[], rate, description, inputDesc, outputDesc, testCases: {inputSample, outputSample}, deadline, correctNum, incorrectNum, correctRate, bestStudentAccount, keyword, pattern |
    | GET        | URL/problem/getProblems   | 取得課程下的所有題目 | courseId                                                     | [{problemId, name, type, category, tag, status(判斷是否已過期。可作答、已關閉), undoStudentNum, doneStudentNum, rate, correctRate, deadline, bestStudentId, bestStudentName, keyword, pattern, bestRunTime, detectCopyResult: [{studentOneId, studentOneName, studentTwoId, studentTwoName, similarity}] (如果沒有就回空List)}] |
-   | POST       | URL/problem/addProblem    | 新增題目             | courseId, name, type, category, tag:[], description, inputDesc, ouputDesc, testCases:{inputSample, outputSample}, deadline, keyword, pattern |                                                              |
+   | POST       | URL/problem/addProblem    | 新增題目             | courseId, name, type, category, tag:[], description, inputDesc, ouputDesc, testCases:{inputSample, outputSample}, deadline, keyword, pattern | problemId                                                    |
    | POST       | URL/problem/editProblem   | 編輯題目             | problemId, name, type, category, tag:[], rate, description, inputDesc, ouputDesc, testCases:{inputSample, outputSample}, deadline, keyword, pattern |                                                              |
    | POST       | URL/problem/deleteProblem | 刪除題目             | problemId                                                    |                                                              |
 
@@ -402,7 +402,7 @@ ProblemBank
     | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | problemId                                                    | [{studentAccount, code}]                                     |
     | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | problemId                                                    | status(boolean)                                              |
 | GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | problemId                                                    | [{studentAccount, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
-    | POST       | URL/team/summitCorrect      | 送出評分資訊               | problemId, correctedList:[{correctedAccount(被批改的學號), score, correctValue, readValue, skillValue, completeValue, wholeValue}] |                                                              |
+    | POST       | URL/team/submitCorrect      | 送出評分資訊               | problemId, correctedList:[{correctedAccount(被批改的學號), score, correctValue, readValue, skillValue, completeValue, wholeValue}] |                                                              |
     
     
 
