@@ -225,6 +225,8 @@ ProblemBank
   | 200         | 請求成功    |
   | 404         | 請求失敗    |
 
+
+
 1. 基礎api
 
    | API Method | API URL        | Desc         | Req Params        | Resp Result                                                  |
@@ -232,6 +234,8 @@ ProblemBank
    | POST       | URL/login      | 登入         | account, password | authority(判斷身份。student \|\| teacher \|\| assistant \|\| admin) |
    | POST       | URL/logout     | 登出         |                   |                                                              |
    | GET        | URL/checkLogin | 檢查登入狀態 |                   | status(boolean)、authority(判斷身份。 student \|\| teacher \|\| assistant \|\| admin) |
+
+   
 
 2. 學生api（student）
 
@@ -252,6 +256,8 @@ ProblemBank
    | POST       | URL/student/updateRate     | 課程下的學生對題目的難易度評分 | problemId, rate                                              |                                                              |
    | GET        | URL/student/allStud        | 課程下的所有學生學號           | courseId                                                     | [studentId]                                                  |
 
+   
+
 3. 題目api（problem）
 
    - [x] 取得單一題目資訊
@@ -266,6 +272,8 @@ ProblemBank
    | POST       | URL/problem/editProblem   | 編輯題目             | problemId, name, type, category, tag:[], rate, description, inputDesc, ouputDesc, testCases:{inputSample, outputSample}, deadline, keyword, pattern |                                                              |
    | POST       | URL/problem/deleteProblem | 刪除題目             | problemId                                                    |                                                              |
 
+   
+
 4. 批改api（judge）
 
    - [x] 批改代碼
@@ -279,6 +287,8 @@ ProblemBank
    | GET        | URL/judge/judgedInfo  | 已被批改後的資訊       | problemId                                   | handDate, score, runTime, code, symbol, output, errorInfo, best(Boolean) |
    | GET        | URL/judge/checkJudged | 學生在此題是否已被批改 | porblemId                                   | judged(boolean)                                              |
    | POST       | URL/judge/judgeCopy   | 判斷抄襲               | problemId                                   |                                                              |
+
+   
 
 5. 教授Api(teacher)
 
@@ -317,6 +327,8 @@ ProblemBank
    | ---------- | ------------------------------- | -------------- | -------------------------------- | ----------- |
    | POST       | URL/assistant/addStudentList    | 將學生加入課程 | courseId, accountList: [account] |             |
    | POST       | URL/assistant/deleteStudentList | 將學生退出課程 | courseId, accountList: [account] |             |
+
+   
 
 7. 分組api(team)(待做)
 
@@ -384,6 +396,8 @@ ProblemBank
     | GET        | URL/data/getDoPerDayData  | 取得每日做題人數（6天）                                      |            | [{date, doPerDayNum}]                                        |
     | GET        | URL/data/getJudgeLiveData | 取得批改即時資訊                                             |            | [{time, studentID, studentName,  problemID, problemName, score, errorMsg}] |
 
+    
+
 13. 題庫api
 
     | API Method | API URL                        | Desc                 | Req Params                                                   | Resp Result                                                  |
@@ -403,8 +417,5 @@ ProblemBank
     | POST       | URL/team/createTeam         | 建立討論題隊伍             | problemId, pairs:[[correctAccount, correctedAccount], ...]   |                                                              |
     | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | problemId                                                    | [{studentAccount, code}]                                     |
     | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | problemId                                                    | status(boolean)                                              |
-| GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | problemId                                                    | [{studentAccount, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
+    | GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | problemId                                                    | [{studentAccount, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
     | POST       | URL/team/submitCorrect      | 送出評分資訊               | problemId, correctedList:[{correctedAccount(被批改的學號), score, correctValue, readValue, skillValue, completeValue, wholeValue}] |                                                              |
-    
-    
-
