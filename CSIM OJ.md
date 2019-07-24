@@ -329,20 +329,7 @@ ProblemBank
    | POST       | URL/assistant/deleteStudentList | 將學生退出課程     | courseId, accountList: [account]                             |                                                            |
    | GET        | URL/assistant/courseList        | 取得助教的所有課程 |                                                              | [{ courseId, courseName, teacherName, semester, class[] }] |
 
-   
-
-7. 分組api(team)(待做)
-
-   - [ ] 建立、刪除隊伍
-
-   | API Method | API URL               | Desc         | Req Params | Resp Result |
-   | ---------- | --------------------- | ------------ | ---------- | ----------- |
-   | POST       | URL/team/createGroups | 建立隨機隊伍 | courseId   |             |
-   | POST       | URL/team/deleteGroups | 刪除隨機隊伍 | courseId   |             |
-
-   
-
-8. 課程api(course)
+7. 課程api(course)
 
    - [x] 取得所有課程資訊
    - [x] 取得課程裡的學生所有資訊
@@ -356,7 +343,7 @@ ProblemBank
 
    
 
-9. 排行api (rank)
+8. 排行api (rank)
 
    - [x] 取得正確解題的學生排行
    - [x] 取得最佳解答的學生排行
@@ -368,7 +355,7 @@ ProblemBank
 
    
 
-10. 回饋Api(feedback)
+9. 回饋Api(feedback)
 
   - [x] 新增課程下的回饋
   - [x] 取得課程下的所有回饋
@@ -380,15 +367,15 @@ ProblemBank
 
   
 
-11. 管理員api(admin)(待做)
+10. 管理員api(admin)(待做)
 
-    | API Method | API URL | Desc | Req Params | Resp Result |
-    | ---------- | ------- | ---- | ---------- | ----------- |
-    |            |         |      |            |             |
+   | API Method | API URL | Desc | Req Params | Resp Result |
+   | ---------- | ------- | ---- | ---------- | ----------- |
+   |            |         |      |            |             |
 
-    
+   
 
-12. 數據api (data)(待做)
+11. 數據api (data)(待做)
 
     | API Method | API URL                   | Desc                                                         | Req Params | Resp Result                                                  |
     | ---------- | ------------------------- | ------------------------------------------------------------ | ---------- | ------------------------------------------------------------ |
@@ -399,7 +386,7 @@ ProblemBank
 
     
 
-13. 題庫api
+12. 題庫api
 
     | API Method | API URL                        | Desc                 | Req Params                                                   | Resp Result                                                  |
     | ---------- | ------------------------------ | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -411,11 +398,11 @@ ProblemBank
 
     
 
-14. 隊伍api (team)
+13. 隊伍api (team)
 
     | API Method | API URL                     | Desc                       | Req Params                                                   | Resp Result                                                  |
     | ---------- | --------------------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-    | POST       | URL/team/createTeam         | 建立討論題隊伍             | problemId, pairs:[[correctAccount, correctedAccount], ...]   |                                                              |
+    | POST       | URL/team/createTeam         | 建立討論題隊伍             | problemId, pairs:[{correctAccount, correctedAccount}, ...]   |                                                              |
     | GET        | URL/team/correctStuds       | 取得此學生要批改的對象     | problemId                                                    | [{studentAccount, code}]                                     |
     | GET        | URL/team/checkCorrectStatus | 取得此學生是否已經完成互評 | problemId                                                    | status(boolean)                                              |
     | GET        | URL/team/correctedInfo      | 取得此學生批改對方的資訊   | problemId                                                    | [{studentAccount, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
