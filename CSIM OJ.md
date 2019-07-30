@@ -302,18 +302,18 @@ ProblemBank
    - [x] 取得課程下的所有feedback(參考Feedback Api)
    - [ ] 建立、刪除隊伍(參考Team Api)
 
-     | **API Method** | API URL                             | Desc                       | Req Params                                                   | Resp Result                                                  |
-     | -------------- | ----------------------------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-     | POST           | URL/teacher/createCourse            | 建立課程                   | courseName, semester, studentClass, taList:[助教帳號]        |                                                              |
-     | POST           | URL/teacher/deleteCourse            | 刪除課程                   | courseId                                                     |                                                              |
-     | POST           | URL/teacher/addStudentList          | 將學生加入課程             | courseId, accountList: [{account, studentName, studentClass}] |                                                              |
-     | POST           | URL/teacher/deleteStudentList       | 將學生退出課程             | courseId, accountList: [account]                             |                                                              |
-     | POST           | URL/teacher/addAssistantList        | 將助教加入課程             | courseId, accountList:[account]                              |                                                              |
-     | POST           | URL/teacher/deleteAssistantList     | 將助教退出課程             | courseId, accountList:[account]                              |                                                              |
-     | GET            | URL/teacher/courseList**            | 取得老師的所有課程         |                                                              | [{ courseId, courseName, teacherName, semester, class[], taList[{assistantId, assistantName}] }] |
-     | GET            | URL/teacher/studentClassList        | 取得班級列表               |                                                              | [className]                                                  |
-     | GET            | URL/teacher/assistantList**         | 取得**所有**的助教名單     |                                                              | [{assistantId, assistantName}]                               |
-     | GET            | URL/teacher/unassignAssistantList** | 取得**未被指派**的助教名單 |                                                              | [{assistantId, assistantName}]                               |
+     | **API Method** | API URL                           | Desc                       | Req Params                                                   | Resp Result                                                  |
+     | -------------- | --------------------------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+     | POST           | URL/teacher/createCourse          | 建立課程                   | courseName, semester, studentClass, taList:[助教帳號]        |                                                              |
+     | POST           | URL/teacher/deleteCourse          | 刪除課程                   | courseId                                                     |                                                              |
+     | POST           | URL/teacher/addStudentList        | 將學生加入課程             | courseId, accountList: [{account, studentName, studentClass}] |                                                              |
+     | POST           | URL/teacher/deleteStudentList     | 將學生退出課程             | courseId, accountList: [account]                             |                                                              |
+     | POST           | URL/teacher/addAssistantList      | 將助教加入課程             | courseId, accountList:[account]                              |                                                              |
+     | POST           | URL/teacher/deleteAssistantList   | 將助教退出課程             | courseId, accountList:[account]                              |                                                              |
+     | GET            | URL/teacher/courseList            | 取得老師的所有課程         |                                                              | [{ courseId, courseName, teacherName, semester, class[], taList[{assistantId, assistantName}] }] |
+     | GET            | URL/teacher/studentClassList      | 取得班級列表               |                                                              | [className]                                                  |
+     | GET            | URL/teacher/assistantList         | 取得**所有**的助教名單     |                                                              | [{assistantId, assistantName}]                               |
+     | GET            | URL/teacher/unassignAssistantList | 取得**未被指派**的助教名單 | courseId                                                     | [{assistantId, assistantName}]                               |
 
    
 
@@ -370,11 +370,11 @@ ProblemBank
 
 10. 管理員api(admin)(待做)
 
-   | API Method | API URL | Desc | Req Params | Resp Result |
-   | ---------- | ------- | ---- | ---------- | ----------- |
-   |            |         |      |            |             |
+  | API Method | API URL | Desc | Req Params | Resp Result |
+  | ---------- | ------- | ---- | ---------- | ----------- |
+  |            |         |      |            |             |
 
-   
+  
 
 11. 數據api (data)(待做)
 
