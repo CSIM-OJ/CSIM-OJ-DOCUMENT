@@ -178,12 +178,27 @@ ProblemBank
     corrected_account // text[], 被批改者學生的學號 // 刪除學生資料時，須同步刪除
     comment_result:[{
       account: '', // double, 批改的學生學號 // 刪除學生資料時，須同步刪除
-      score: 0, // double, 批改的學生分數
-      correctValue: 0, // double, 程式正確性
-      readValue: 0, // double, 程式可讀性
-      skillValue: 0, // double, 技巧運用
-      completeValue: 0, // double, 程式完整性
-      wholeValue: 0 // double, 綜合評分
+      correctValue: { // json, 程式正確性
+         score: // double
+         comment: // string
+      },
+      readValue:  { // json,  程式可讀性
+         score: // double
+         comment: // string
+      },
+      skillValue:  { //json, 技巧運用
+         score: // double
+         comment: // string
+      }, 
+      completeValue:  { // json, 程式完整性
+         score: // double
+         comment: // string
+      }, 
+      wholeValue:  { // json 綜合評分
+         score: // double
+         comment: // string
+      }, 
+      comment: // string 
     }]
     ```
 
@@ -401,13 +416,13 @@ ProblemBank
 
 13. 隊伍api (team)
 
-    | API Method | API URL                         | Desc                         | Req Params                                                   | Resp Result                                                  |
-    | ---------- | ------------------------------- | ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-    | POST       | URL/team/createTeam             | 建立討論題隊伍               | problemId, pairs:[{correctAccount, correctedAccount}, ...]   |                                                              |
-    | GET        | URL/team/correctStuds           | 取得此學生要批改的對象       | problemId                                                    | [{studentAccount, code}]                                     |
-    | GET        | URL/team/checkCorrectStatus     | 取得此學生是否已經完成互評   | problemId                                                    | status(boolean)                                              |
-    | GET        | URL/team/correctInfo            | 取得此學生批改對方的資訊     | problemId                                                    | [{studentAccount, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
-    | GET        | URL/team/checkCorrectedStatus** | 取得此學生是否**被**完成互評 | problemId                                                    | status(boolean)                                              |
-    | GET        | URL/team/correctedInfo          | 取得此學生**被**批改的資訊   | problemId                                                    | [{score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
-    | POST       | URL/team/submitCorrect          | 送出評分資訊                 | problemId, correctedList:[{correctedAccount(被批改的學號), score, correctValue, readValue, skillValue, completeValue, wholeValue}] |                                                              |
-    | GET        | URL/teacher/discussScore**      | 取得互評成績                 | problemId                                                    | [{ account, name, studentClass, courseName, score(系統批改的成績), discussedScore(被批改的成績):[{studentAccount, correctValue, readValue, skillValue, completeValue, wholeValue}] }] |
+    | API Method | API URL                       | Desc                         | Req Params                                                   | Resp Result                                                  |
+    | ---------- | ----------------------------- | ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+    | POST       | URL/team/createTeam           | 建立討論題隊伍               | problemId, pairs:[{correctAccount, correctedAccount}, ...]   |                                                              |
+    | GET        | URL/team/correctStuds         | 取得此學生要批改的對象       | problemId                                                    | [{studentAccount, code}]                                     |
+    | GET        | URL/team/checkCorrectStatus   | 取得此學生是否已經完成互評   | problemId                                                    | status(boolean)                                              |
+    | GET        | URL/team/correctInfo          | 取得此學生批改對方的資訊     | problemId                                                    | [{studentAccount, code, score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
+    | GET        | URL/team/checkCorrectedStatus | 取得此學生是否**被**完成互評 | problemId                                                    | status(boolean)                                              |
+    | GET        | URL/team/correctedInfo        | 取得此學生**被**批改的資訊   | problemId                                                    | [{score(分數), correctValue(程式正確性), readValue(程式可讀性), skillValue(技巧運用), completeValue(程式完整性), wholeValue(綜合評分)}] |
+    | POST       | URL/team/submitCorrect        | 送出評分資訊                 | problemId, correctedList:[{correctedAccount(被批改的學號), score, correctValue, readValue, skillValue, completeValue, wholeValue}] |                                                              |
+    | GET        | URL/teacher/discussScore      | 取得互評成績                 | problemId                                                    | [{ account, name, studentClass, courseName, score(系統批改的成績), discussedScore(被批改的成績):[{studentAccount, correctValue, readValue, skillValue, completeValue, wholeValue}] }] |
