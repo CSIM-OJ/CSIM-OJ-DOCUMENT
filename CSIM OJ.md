@@ -270,6 +270,7 @@ ProblemBank
    | GET        | URL/student/problemInfo    | 課程下的學生所有題目資料       | courseId, type:(作業 \|\| 練習題 \|\| 討論題 \|\| 全部), isJudge(boolean) | [{problemId, name, type, deadline, rate}]                    |
    | POST       | URL/student/updateRate     | 課程下的學生對題目的難易度評分 | problemId, rate                                              |                                                              |
    | GET        | URL/student/allStud        | 課程下的所有學生學號           | courseId                                                     | [studentId]                                                  |
+   | GET        | URL/student/accountInfo    | 取得學號的學生資料             | [account]                                                    | [{account, name, studentClass}]                              |
 
    
 
