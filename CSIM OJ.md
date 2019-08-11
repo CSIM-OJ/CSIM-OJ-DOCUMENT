@@ -270,6 +270,7 @@ ProblemBank
    | GET        | URL/student/problemInfo    | 課程下的學生所有題目資料       | courseId, type:(作業 \|\| 練習題 \|\| 討論題 \|\| 全部), isJudge(boolean) | [{problemId, name, type, deadline, rate}]                    |
    | POST       | URL/student/updateRate     | 課程下的學生對題目的難易度評分 | problemId, rate                                              |                                                              |
    | GET        | URL/student/allStud        | 課程下的所有學生學號           | courseId                                                     | [studentId]                                                  |
+   | GET        | URL/student/accountInfo    | 取得學號的學生資料             | [account]                                                    | [{account, name, studentClass}]                              |
 
    
 
@@ -317,18 +318,18 @@ ProblemBank
    - [x] 取得課程下的所有feedback(參考Feedback Api)
    - [ ] 建立、刪除隊伍(參考Team Api)
 
-     | **API Method** | API URL                           | Desc                       | Req Params                                                   | Resp Result                                                  |
-     | -------------- | --------------------------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-     | POST           | URL/teacher/createCourse          | 建立課程                   | courseName, semester, studentClass, taList:[助教帳號]        |                                                              |
-     | POST           | URL/teacher/deleteCourse          | 刪除課程                   | courseId                                                     |                                                              |
-     | POST           | URL/teacher/addStudentList        | 將學生加入課程             | courseId, accountList: [{account, studentName, studentClass}] |                                                              |
-     | POST           | URL/teacher/deleteStudentList     | 將學生退出課程             | courseId, accountList: [account]                             |                                                              |
-     | POST           | URL/teacher/addAssistantList      | 將助教加入課程             | courseId, accountList:[account]                              |                                                              |
-     | POST           | URL/teacher/deleteAssistantList   | 將助教退出課程             | courseId, accountList:[account]                              |                                                              |
-     | GET            | URL/teacher/courseList            | 取得老師的所有課程         |                                                              | [{ courseId, courseName, teacherName, semester, class[], taList[{assistantId, assistantName}] }] |
-     | GET            | URL/teacher/studentClassList      | 取得班級列表               |                                                              | [className]                                                  |
-     | GET            | URL/teacher/assistantList         | 取得**所有**的助教名單     |                                                              | [{assistantId, assistantName}]                               |
-     | GET            | URL/teacher/unassignAssistantList | 取得**未被指派**的助教名單 | courseId                                                     | [{assistantId, assistantName}]                               |
+     | **API Method** | API URL                           | Desc                       | Req Params                                            | Resp Result                                                  |
+     | -------------- | --------------------------------- | -------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ |
+     | POST           | URL/teacher/createCourse          | 建立課程                   | courseName, semester, studentClass, taList:[助教帳號] |                                                              |
+     | POST           | URL/teacher/deleteCourse          | 刪除課程                   | courseId                                              |                                                              |
+     | POST           | URL/teacher/addStudentList        | 將學生加入課程             | courseId, accountList: [account]                      |                                                              |
+     | POST           | URL/teacher/deleteStudentList     | 將學生退出課程             | courseId, accountList: [account]                      |                                                              |
+     | POST           | URL/teacher/addAssistantList      | 將助教加入課程             | courseId, accountList:[account]                       |                                                              |
+     | POST           | URL/teacher/deleteAssistantList   | 將助教退出課程             | courseId, accountList:[account]                       |                                                              |
+     | GET            | URL/teacher/courseList            | 取得老師的所有課程         |                                                       | [{ courseId, courseName, teacherName, semester, class[], taList[{assistantId, assistantName}] }] |
+     | GET            | URL/teacher/studentClassList      | 取得班級列表               |                                                       | [className]                                                  |
+     | GET            | URL/teacher/assistantList         | 取得**所有**的助教名單     |                                                       | [{assistantId, assistantName}]                               |
+     | GET            | URL/teacher/unassignAssistantList | 取得**未被指派**的助教名單 | courseId                                              | [{assistantId, assistantName}]                               |
 
    
 
@@ -339,11 +340,11 @@ ProblemBank
    - [x] 取得課程下的所有feedback (參考Feedback Api)
    - [ ] 建立、刪除隊伍(參考 Team Api)
 
-   | API Method | API URL                         | Desc               | Req Params                                                   | Resp Result                                                |
-   | ---------- | ------------------------------- | ------------------ | ------------------------------------------------------------ | ---------------------------------------------------------- |
-   | POST       | URL/assistant/addStudentList    | 將學生加入課程     | courseId, accountList: [{account, studentName, studentClass}] |                                                            |
-   | POST       | URL/assistant/deleteStudentList | 將學生退出課程     | courseId, accountList: [account]                             |                                                            |
-   | GET        | URL/assistant/courseList        | 取得助教的所有課程 |                                                              | [{ courseId, courseName, teacherName, semester, class[] }] |
+   | API Method | API URL                         | Desc               | Req Params                       | Resp Result                                                |
+   | ---------- | ------------------------------- | ------------------ | -------------------------------- | ---------------------------------------------------------- |
+   | POST       | URL/assistant/addStudentList    | 將學生加入課程     | courseId, accountList: [account] |                                                            |
+   | POST       | URL/assistant/deleteStudentList | 將學生退出課程     | courseId, accountList: [account] |                                                            |
+   | GET        | URL/assistant/courseList        | 取得助教的所有課程 |                                  | [{ courseId, courseName, teacherName, semester, class[] }] |
 
 7. 課程api(course)
 
@@ -416,13 +417,15 @@ ProblemBank
 
 13. 隊伍api (team)
 
-    | API Method | API URL                       | Desc                         | Req Params                                                   | Resp Result                                                  |
-    | ---------- | ----------------------------- | ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-    | POST       | URL/team/createTeam           | 建立討論題隊伍               | problemId, pairs:[{correctAccount, correctedAccount}, ...]   |                                                              |
-    | GET        | URL/team/correctStuds         | 取得此學生要批改的對象       | problemId                                                    | [{studentAccount, code}]                                     |
-    | GET        | URL/team/checkCorrectStatus   | 取得此學生是否已經完成互評   | problemId                                                    | status(boolean)                                              |
-    | GET        | URL/team/correctInfo          | 取得此學生批改對方的資訊     | problemId                                                    | [{studentAccount, code, correctValue(程式正確性):{score, comment}, readValue(程式可讀性):{score, comment}, skillValue(技巧運用):{score, comment}, completeValue(程式完整性):{score, comment}, wholeValue(綜合評分):{score, comment}, comment(總評論))}] |
-    | GET        | URL/team/checkCorrectedStatus | 取得此學生是否**被**完成互評 | problemId                                                    | status(boolean)                                              |
-    | GET        | URL/team/correctedInfo        | 取得此學生**被**批改的資訊   | problemId                                                    | [{correctValue(程式正確性), readValue(程式可讀性):{score, comment}, skillValue(技巧運用):{score, comment}, completeValue(程式完整性):{score, comment}, wholeValue(綜合評分):{score, comment}, comment(總評論)}] |
-    | POST       | URL/team/submitCorrect        | 送出評分資訊                 | problemId, correctedList:[{correctedAccount(被批改的學號), correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] |                                                              |
-    | GET        | URL/team/discussScore         | 取得互評成績                 | problemId                                                    | [{ account, name, studentClass, courseName, score(系統批改的成績), discussedScore(被批改的成績):[{studentAccount, correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] }] |
+    | API Method | API URL                        | Desc                           | Req Params                                                   | Resp Result                                                  |
+    | ---------- | ------------------------------ | ------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+    | POST       | URL/team/createTeam            | 建立討論題隊伍                 | problemId, pairs:[{correctAccount, correctedAccount}, ...]   |                                                              |
+    | GET        | URL/team/correctStuds          | 取得此學生要批改的對象         | problemId                                                    | [{studentAccount, code}]                                     |
+    | GET        | URL/team/checkCorrectStatus    | 取得此學生是否已經完成互評     | problemId                                                    | status(boolean)                                              |
+    | GET        | URL/team/correctInfo           | 取得此學生批改對方的資訊       | problemId                                                    | [{studentAccount, code, correctValue(程式正確性):{score, comment}, readValue(程式可讀性):{score, comment}, skillValue(技巧運用):{score, comment}, completeValue(程式完整性):{score, comment}, wholeValue(綜合評分):{score, comment}, comment(總評論))}] |
+    | GET        | URL/team/checkCorrectedStatus  | 取得此學生是否**被**完成互評   | problemId                                                    | status(boolean)                                              |
+    | GET        | URL/team/correctedInfo         | 取得此學生**被**批改的資訊     | problemId                                                    | [{correctValue(程式正確性), readValue(程式可讀性):{score, comment}, skillValue(技巧運用):{score, comment}, completeValue(程式完整性):{score, comment}, wholeValue(綜合評分):{score, comment}, comment(總評論)}] |
+    | POST       | URL/team/submitCorrect         | 送出評分資訊                   | problemId, correctedList:[{correctedAccount(被批改的學號), correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] |                                                              |
+    | GET        | URL/team/discussScore          | 取得互評成績                   | problemId                                                    | [{ account, name, studentClass, courseName, score(系統批改的成績), discussedScore(被批改的成績):[{studentAccount, correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] }] |
+    | GET        | URL/team/teacher/correctInfo   | 老師取得此討論題學生的批改資訊 | problemId                                                    | [{studentAccount, code, isJudged(學生是否已送出), isTrJudged(老師是否已批改過),  correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment }] |
+    | POST       | URL/team/teacher/submitCorrect | 老師批改此同學的討論題成績     | problemId, studentAccount, correctedList:[{correctedAccount(被批改的學號), correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] |                                                              |
