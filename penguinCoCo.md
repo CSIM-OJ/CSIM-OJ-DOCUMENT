@@ -21,124 +21,200 @@ ProblemBank
 
 + Table：
 
-1. **student**：學生
+1. **person**：使用者
 
    ```json
-   id // primary key, bigserial
-   account // text, 學生學號
-   password // text, 學生密碼
-   name // text, 學生姓名
-   student_class // text, 年度+學生系級 e.g.106資管B
+   id // pk, bigserial
+   account // text(not null), 學號
+   password // text(not null), 密碼(加密)
+   member_id // fk, bigserial 學生id || 助教id || 老師id || 管理員id
    ```
 
-2. **problem**
+2. **role**：角色
 
    ```json
-   id // primary key, bigserial
-   course_id // foreign key, bigserial
-   name // text, 題目名稱
-   type // text, 題目類型(作業 || 練習題 || 討論題)
-   category // text, 題目作答類型(輸入輸出 || 輸入寫檔 || 讀檔輸出 || 讀檔寫檔)
-   tag // text[], 題型分類(Java || Python, 條件,迴圈)(以,為分隔)
-   rate // double, 題目平均難易度,預設為0
-   description // text, 題目描述
-   input_desc // text, 輸入描述
-   output_desc // text, 輸出描述
-   test_cases: {[ // json, 測試範本
-   	"inputSample": "", // String, 輸入範本
-     "outputSample": "" // String, 輸出範本
+   id // pk, bigserial
+   name // text(not null), 角色英文名稱
+   name_zh // text(not null), 角色中文名稱
+   ```
+
+3. **person_role**：使用者與角色對應表
+
+   ```json
+   person_id // pk, bigserial
+   role_id // pk, bigserial
+   ```
+
+4. **student**：學生
+
+   ```json
+   id // pk, bigserial
+   name // text(not null), 學生姓名
+   student_class // text(not null), 年度+學生系級 e.g.106資管B
+   ```
+
+5. **assistant**：助教
+
+   ```json
+   id // pk, bigserial
+   name // text(not null), 助教姓名
+   ```
+
+6. **teacher**：老師
+
+   ```json
+   id // pk, bigserial
+   name // text(not null), 老師姓名
+   ```
+
+7. **admin**：管理員
+
+   ```json
+   id // pk, bigserial
+   name // text(not null), 管理員姓名
+   ```
+
+8. **course**：課程
+
+   ```json
+   id // pk, bigserial
+   teacher_id // fk, bigserial
+   course_name // text(not null), 課程名稱
+   semester // text(not null), 課程日期(格式:104上 || 104下)
+   ```
+
+9. **student_course**：學生與課程對應表
+
+   ```json
+   student_id // pk, bigserial
+   course_id // pk, bigserial
+   ```
+
+10. **assistant_course**：助教與課程對應表
+
+   ```json
+   assistant_id // pk, bigserial
+   course_id // pk, bigserial
+   ```
+
+11. **problem**
+
+    ```json
+    id // pk, bigserial
+    course_id // fk(not null), bigserial
+    name // text(not null), 題目名稱
+    type // text(not null), 題目類型(作業 || 練習題 || 討論題)
+    category // text(not null), 題目作答類型(輸入輸出 || 輸入寫檔 || 讀檔輸出 || 讀檔寫檔)
+    language // text[](not null), 題目可作答的程式語言(Java, Python)
+    tag // text[](not null), 題型分類(條件(condition),迴圈(loop))
+    rate // double precision(not null), 題目平均難易度,預設為0
+    description // text(not null), 題目描述
+    input_desc // text(not null), 輸入描述
+    output_desc // text(not null), 輸出描述
+    test_cases: [{ // json, 測試範本
+    	"inputSample": "", // not null, 輸入範本
+      	"outputSample": "" // not null, 輸出範本
+    }]
+    deadline // date(not null), 截止日期, 格式為yyyy-MM-dd
+    correct_num // integer(not null), 此題正確(滿分)人數, 預設為0
+    incorrect_num // integer(not null), 此題錯誤(未滿分)人數, 預設為0
+    correct_rate // double precision(not null), 正確率, 預設為0
+    best_student_id // text(null), 最佳代碼的學生id, 預設為null // 注意學生資料刪除時，設為null
+    pattern // text[](not null), 該題須出現的模板代碼, 預設為空
+    ```
+
+12. **copy**
+
+    ```json
+    id // pk, bigserial
+    problem_id // fk, bigserial
+    student_one_id // foreign key, 學生1 id // 注意學生資料刪除時，須同步刪除copy
+    student_two_id // foreign key, 學生2 id // 注意學生資料刪除時，須同步刪除copy
+    similarity // double precision(not null), 兩者代碼相似度 
+    ```
+
+13. **judge**
+
+   ```json
+   id // pk, bigserial
+   problem_id // fk, bigserial
+   student_id // fk, bigserial
+   rate // double precision, 題目難易度, 預設為0
+   historyCode: {[ // json, 學生該題的歷史題交代碼
+       "handDate": "", // String, 提交日期(格式:yyyy-MM-dd)
+       "code": "", // String, 學生的代碼
+       "runTime": 0, // double, 該代碼運行時間, 預設為0
+       "output": [], // String, 輸出內容
+       "error": [], // String, 錯誤訊息
+       "symbol": [], // String, judge結果
+       "score": 0, // double , 程式分數
    ]}
-   deadline // date, 截止日期, 格式為yyyy-mm-dd
-   correct_num // integer, 此題正確(滿分)人數, 預設為0
-   incorrect_num // integer, 此題錯誤(未滿分)人數, 預設為0
-   correct_rate // double, 正確率, 預設為0
-   best_student_account // text, 最佳代碼的學生學號(account) // 注意學生資料刪除時，須同步
-   keyword // text[], 該題須出現的程式語言的關鍵字, 預設為空
-   pattern // text[], 該題須出現的模板代碼, 預設為空
    ```
 
-3. **copy**
+14. **team**(暫定)
 
    ```json
    id // primary key, bigserial
    problem_id // foreign key, bigserial
-   student_one_account // foreign key, 學生1學號(account) // 注意學生資料刪除時，須同步
-   student_two_account // foreign key, 學生2學號(account) // 注意學生資料刪除時，須同步
-   similarity // double, 兩者代碼相似度
+   account // text, 批改者學生的學號 // 刪除學生資料時，須同步刪除
+   corrected_account // text[], 被批改者學生的學號 // 刪除學生資料時，須同步刪除
+   comment_result:[{
+     account: '', // double, 批改的學生學號 // 刪除學生資料時，須同步刪除
+     correctValue: { // json, 程式正確性
+        score: // double
+        comment: // string
+     },
+     readValue:  { // json,  程式可讀性
+        score: // double
+        comment: // string
+     },
+     skillValue:  { //json, 技巧運用
+        score: // double
+        comment: // string
+     }, 
+     completeValue:  { // json, 程式完整性
+        score: // double
+        comment: // string
+     }, 
+     wholeValue:  { // json 綜合評分
+        score: // double
+        comment: // string
+     }, 
+     comment: // string 
+   }]
    ```
 
-4. **teacher** // 當刪除Teacher時，同步刪除Course
+15. **feedback**：意見回饋
 
    ```json
-   id // primary key, bigserial
-   account // text, 老師學號
-   password // text, 老師密碼
-   name // text, 老師密碼
+   id // pk, bigserial
+   courseId // fk, bigserial
+   studentId // fk, bigserial
+   date // data, 提送feedback當時日期(格式yyyy-MM-dd)
+   content // text, feedback內容
    ```
 
-5. **assistant**
+16. **problem_bank**：題庫
 
-   ```json
-   id // primary key, bigserial
-   account // text, 助教學號
-   password // text, 助教密碼
-   name // text, 助教姓名
-   ```
+    ```json
+    id // pk, bigserial
+    course_id // fk(not null), bigserial
+    name // text(not null), 題目名稱
+    type // text(not null), 題目類型(作業 || 練習題 || 討論題)
+    category // text(not null), 題目作答類型(輸入輸出 || 輸入寫檔 || 讀檔輸出 || 讀檔寫檔)
+    language // text[](not null), 題目可作答的程式語言(Java, Python)
+    tag // text[](not null), 題型分類(條件(condition),迴圈(loop))
+    rate // double precision(not null), 題目平均難易度,預設為0
+    description // text(not null), 題目描述
+    input_desc // text(not null), 輸入描述
+    output_desc // text(not null), 輸出描述
+    test_cases: [{ // json, 測試範本
+    	"inputSample": "", // not null, 輸入範本
+      	"outputSample": "" // not null, 輸出範本
+    }]
+    ```
 
-6. **admin**
-
-   ```json
-   id // primary key, bigserial
-   account // text, 管理員學號
-   password // text, 管理員密碼
-   name // text, 管理員姓名
-   ```
-
-7. **course** // 當刪除course時，一併刪除problem、copy
-
-   ```js
-   id // primary key, bigserial
-   teacher_id // foreign key, bigserial
-   course_name // text, 課程名稱
-   semester // text, 課程日期(格式:104上 || 104下)
-   ```
-
-8. **assistant_course** // 當刪除course時，須同步刪除assistant裡面的course
-
-   ```json
-   assistant_id // primary key, bigserial
-   course_id // primary key, bigserial
-   ```
-
-9. **judge**
-
-  ```json
-  id // primary key, bigserial
-  problemId // foreign key, bigserial
-  studentId // foreign key, bigserial
-  rate // double, 題目難易度, 預設為0
-  historyCode: {[ // json, 學生該題的歷史題交代碼
-      "handDate": "", // String, 提交日期(格式:yy-mm-dd)
-      "code": "", // String, 學生的代碼
-      "runTime": 0, // double, 該代碼運行時間, 預設為0
-      "output": [], // String, 輸出內容
-      "error": [], // String, 錯誤訊息
-      "symbol": [], // String, judge結果
-      "score": 0, // double , 程式分數
-  ]}
-  ```
-
-10. **feedback** // 當刪除學生會同步刪除feedback
-
-  ```json
-  id // primary key, bigserial
-  courseId // foreign key, bigserial
-  studentId // forign key, bigserial
-  date // data, 提送feedback當時日期(格式yyyy-MM-dd)
-  content // text, feedback內容
-  ```
-
-11. **dashboard(待做)**
+17. **dashboard(待做)**
 
     ```json
     id // primary key, bigserial
@@ -161,51 +237,6 @@ ProblemBank
     }]
     ```
 
-12. **student_course** // course刪掉的話，學生須同步刪除裡面的course
-
-    ```json
-    student_id // primary key, bigserial
-    course_id // primary key, bigserial
-    ```
-
-
-13. **team**
-
-    ```json
-    id // primary key, bigserial
-    problem_id // foreign key, bigserial
-    account // text, 批改者學生的學號 // 刪除學生資料時，須同步刪除
-    corrected_account // text[], 被批改者學生的學號 // 刪除學生資料時，須同步刪除
-    comment_result:[{
-      account: '', // double, 批改的學生學號 // 刪除學生資料時，須同步刪除
-      score: 0, // double, 批改的學生分數
-      correctValue: 0, // double, 程式正確性
-      readValue: 0, // double, 程式可讀性
-      skillValue: 0, // double, 技巧運用
-      completeValue: 0, // double, 程式完整性
-      wholeValue: 0 // double, 綜合評分
-    }]
-    ```
-
-
-14. **problem_bank**
-
-    ```json
-    id // primary key, bigserial
-    name // text, 題目名稱
-    category // text, 題目作答類型(輸入輸出 || 輸入寫檔 || 讀檔輸出 || 讀檔寫檔)
-    tag // text[], 題型分類(Java || Python, 條件,迴圈)(以,為分隔)
-    description // text, 題目描述
-    input_desc // text, 輸入描述
-    output_desc // text, 輸出描述
-    test_cases: {[ // json, 測試範本
-    	"inputSample": "", // String, 輸入範本
-      "outputSample": "" // String, 輸出範本
-    ]}
-    ```
-
-    
-
 # Restful API
 
 - URL = https://hostname:8081/api/
@@ -216,23 +247,28 @@ ProblemBank
 
 - 原生 Status Code
 
-  | Status Code | Description |
-  | ----------- | ----------- |
-  | 200         | 請求成功    |
-  | 404         | 請求失敗    |
+  | Status Code | Description                                                  |
+  | ----------- | ------------------------------------------------------------ |
+  | 200         | 請求成功，並且有返回內容(GET)                                |
+  | 201         | 請求成功，並且在伺服器上了新建或修改資源(POST/PUT/PATCH)     |
+  | 204         | 請求成功，但是沒有需要返回內容(DELETE)                       |
+  | 400         | 請求失敗，使用者發出的請求有錯誤，伺服器没有進行新建或修改資源的操作 |
+  | 401         | 請求失敗，使用者需要登入才可執行該動作                       |
+  | 403         | 請求失敗，使用者沒有權限可以執行該動作                       |
+  | 404         | 請求失敗，資源、檔案不存在                                   |
+  | 500         | 請求失敗，伺服器出現錯誤                                     |
 
 
 
 1. 基礎api (JWT)
 
-   | API Method | API URL        | Desc         | Req Params        | Resp Result                                                  |
-   | ---------- | -------------- | ------------ | ----------------- | ------------------------------------------------------------ |
-   | POST       | URL/login      | 登入         | account, password | authority(判斷身份。student \|\| teacher \|\| assistant \|\| admin) |
-   | POST       | URL/logout     | 登出         |                   |                                                              |
-   | GET        | URL/checkLogin | 檢查登入狀態 |                   | status(boolean)、authority(判斷身份。 student \|\| teacher \|\| assistant \|\| admin) |
-
+   | API Method | API URL    | Desc | Req Params        | Resp Result                                                  |
+   | ---------- | ---------- | ---- | ----------------- | ------------------------------------------------------------ |
+   | POST       | URL/login  | 登入 | account, password | authority(判斷身份。student \|\| teacher \|\| assistant \|\| admin) |
+   | POST       | URL/logout | 登出 |                   |                                                              |
    
 
+   
 2. 學生api（student）
 
    - [x] 更改個人密碼
