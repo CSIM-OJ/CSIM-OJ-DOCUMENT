@@ -284,10 +284,9 @@ ProblemBank
    | GET        | URL/student/course/problem/judgeInfo | 課程下的學生歷史成績及題目資訊 | courseId                                                     | [{problemId, problemName, type,  historyCode:[{handDate, code, runTime, output, symbol, score, errorMessage}], rate,  correctRate, isBestCode(Boolean), copys: [{account, similarity}]}] |
    | GET        | URL/student/course/problem           | 課程下的學生所有題目資料       | courseId, type:(作業 \|\| 練習題 \|\| 討論題 \|\| 全部), isJudge(boolean) | [{problemId, name, type, deadline, rate}]                    |
    | PUT        | URL/student/course/problem/rate      | 課程下的學生對題目的難易度評分 | problemId, rate                                              |                                                              |
-   | GET        | URL/student/account                  | 課程下的所有學生學號           | courseId                                                     | [studentId]                                                  |
-
    
 
+   
 3. 題目api（problem）
 
    - [x] 取得單一題目資訊
@@ -297,9 +296,9 @@ ProblemBank
    | API Method | API URL               | Desc                     | Req Params                                                   | Resp Result                                                  |
    | ---------- | --------------------- | ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
    | GET        | URL/problem           | 題目的資訊               | problemId                                                    | name, type, category, tag:[], rate, description, inputDesc, outputDesc, testCases: {inputSample, outputSample}, deadline, correctNum, incorrectNum, correctRate, pattern |
-   | GET        | URL/problem/judgeInfo | 取得課程下的所有題目     | courseId                                                     | [{problemId, name, type, category, tag, status(判斷是否已過期。可作答、已關閉), undoStudentNum, doneStudentNum, rate, correctRate, deadline, bestStudentId, bestStudentName, pattern, bestRunTime}] |
-   | GET        | URL/problem/score     | 取得題目下的所有學生成績 | problemId                                                    | [{studentId, studentName, studentClass, score, code}]        |
-   | GET        | URL/problem/copy      | 取得題目下的抄襲         | problemId                                                    | detectCopyResult: [{studentOneId, studentOneName, studentTwoId, studentTwoName, similarity}] (如果沒有就回空List)}] |
+   | GET        | URL/problem/judgeInfo | 取得課程下的所有題目     | courseId                                                     | [{problemId, name, type, category, tag, status(判斷是否已過期。可作答、已關閉), undoStudentNum, doneStudentNum, rate, correctRate, deadline, bestStudentAccount, bestStudentName, pattern, bestRunTime}] |
+   | GET        | URL/problem/score     | 取得題目下的所有學生成績 | problemId                                                    | [{studentAccount, studentName, studentClass, score, code}]   |
+   | GET        | URL/problem/copy      | 取得題目下的抄襲         | problemId                                                    | [{studentOneAccount, studentOneName, studentTwoAccount, studentTwoName, similarity}] (如果沒有就回空List)}] |
    | POST       | URL/problem           | 新增題目                 | courseId, name, type, category, tag:[], description, inputDesc, ouputDesc, testCases:{inputSample, outputSample}, deadline,pattern | problemId                                                    |
    | PUT        | URL/problem           | 編輯題目                 | problemId, name, type, category, tag:[], rate, description, inputDesc, ouputDesc, testCases:{inputSample, outputSample}, deadline,  pattern |                                                              |
    | DELETE     | URL/problem           | 刪除題目                 | problemId                                                    |                                                              |
@@ -359,7 +358,7 @@ ProblemBank
    | ---------- | ------------------------------- | ------------------------ | ---------------------------------------------------------- | ---------------------------------------------------------- |
    | PUT        | URL/assistant/course/student    | 將學生加入課程           | courseId,action:( 0(加入) 1(退出)), accountList: [account] |                                                            |
    | GET        | URL/assistant/course            | 取得助教的所有課程       |                                                            | [{ courseId, courseName, teacherName, semester, class[] }] |
-   | GET        | URL/assistant/studentAccounts   | 取得課程下的所有學生學號 | courseId                                                   | [account]                                                  |
+   | GET        | URL/assistant/allStudentAccount | 取得課程下的所有學生學號 | courseId                                                   | [account]                                                  |
    | GET        | URL/assistant/allStudentProfile | 取得學號的學生資料       | [account]                                                  | [{account, name, studentClass}]                            |
 
 7. 課程api(course)
@@ -386,7 +385,7 @@ ProblemBank
 
    | API Method | API URL                        | Desc                 | Req Params                                                   | Resp Result                                                  |
    | ---------- | ------------------------------ | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-   | POST       | URL/problemBank/addProblem     | 在題庫中建立題目     | name, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
+   | POST       | URL/problemBank                | 在題庫中建立題目     | name, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
    | PUT        | URL/problemBank                | 在題庫中編輯題目     | id, name, category, tag, description, inputDesc, outputDesc, testCases |                                                              |
    | GET        | URL/problemBank                | 在題庫中取得所有題目 |                                                              | [{id, name, category,  tag}]                                 |
    | GET        | URL/problemBank/:problemBankId | 取得題目詳細資訊     |                                                              | id, name, category, tag, description, inputDesc, outputDesc, testCases |
