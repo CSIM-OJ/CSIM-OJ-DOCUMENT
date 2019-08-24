@@ -270,7 +270,7 @@ ProblemBank
    | GET        | URL/student/problemInfo    | 課程下的學生所有題目資料       | courseId, type:(作業 \|\| 練習題 \|\| 討論題 \|\| 全部), isJudge(boolean) | [{problemId, name, type, deadline, rate, tag}]               |
    | POST       | URL/student/updateRate     | 課程下的學生對題目的難易度評分 | problemId, rate                                              |                                                              |
    | GET        | URL/student/allStud        | 課程下的所有學生學號           | courseId                                                     | [studentId]                                                  |
-   | GET        | URL/student/accountInfo    | 取得學號的學生資料             | [account]                                                    | [{account, name, studentClass}]                              |
+   | POST       | URL/student/accountInfo    | 取得學號的學生資料             | [account]                                                    | [{account, name, studentClass}]                              |
 
    
 
@@ -377,18 +377,18 @@ ProblemBank
   - [x] 新增課程下的回饋
   - [x] 取得課程下的所有回饋
 
-  | API Method | API URL                         | Desc                     | Req Params        | Resp Result                      |
-  | ---------- | ------------------------------- | ------------------------ | ----------------- | -------------------------------- |
-  | POST       | URL/feedback/addFeedback        | 新增回饋                 | courseId, content |                                  |
-  | GET        | URL/feedback/getCourseFeedbacks | 取得課程下的所有feedback | courseId          | [{account, name, date, content}] |
+| API Method | API URL                         | Desc                     | Req Params        | Resp Result                      |
+| ---------- | ------------------------------- | ------------------------ | ----------------- | -------------------------------- |
+| POST       | URL/feedback/addFeedback        | 新增回饋                 | courseId, content |                                  |
+| GET        | URL/feedback/getCourseFeedbacks | 取得課程下的所有feedback | courseId          | [{account, name, date, content}] |
 
   
 
 10. 管理員api(admin)(待做)
 
-  | API Method | API URL | Desc | Req Params | Resp Result |
-  | ---------- | ------- | ---- | ---------- | ----------- |
-  |            |         |      |            |             |
+| API Method | API URL | Desc | Req Params | Resp Result |
+| ---------- | ------- | ---- | ---------- | ----------- |
+|            |         |      |            |             |
 
   
 
@@ -428,4 +428,4 @@ ProblemBank
     | POST       | URL/team/submitCorrect         | 送出評分資訊                   | problemId, correctedList:[{correctedAccount(被批改的學號), correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] |                                                              |
     | GET        | URL/team/discussScore          | 取得互評成績                   | problemId                                                    | [{ account, name, studentClass, courseName, score(系統批改的成績), discussedScore(被批改的成績):[{studentAccount, correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] }] |
     | GET        | URL/team/teacher/correctInfo   | 老師取得此討論題學生的批改資訊 | problemId                                                    | [{studentAccount, code, isJudged(學生是否已送出), isTrJudged(老師是否已批改過),  correctValue:{score: "", comment: ""}, readValue:{score: "", comment: ""}, skillValue:{score: "", comment: ""}, completeValue:{score: "", comment: ""}, wholeValue:{score: "", comment: ""}, comment }] |
-    | POST       | URL/team/teacher/submitCorrect | 老師批改此同學的討論題成績     | problemId, studentAccount, correctedList:[{correctedAccount(被批改的學號), correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] |                                                              |
+    | POST       | URL/team/teacher/submitCorrect | 老師批改此同學的討論題成績     | problemId, correctedList:[{correctedAccount(被批改的學號), correctValue:{score, comment}, readValue:{score, comment}, skillValue:{score, comment}, completeValue:{score, comment}, wholeValue:{score, comment}, comment(總評論)}] |                                                              |
